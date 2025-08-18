@@ -6,3 +6,5 @@ The parameter n_wt_agg set the number of wind turbines in the aggregated model.
 n_wt_agg = 1 models the 2 MW wind turbine, while n_wt_agg = 150 models the 300 MW equivalent wind turbine.
 
 Wind_Turbine_Model contains the wind turbine model.
+
+Complete_Model contains the complete model of the Princess Elisabeth Island system.

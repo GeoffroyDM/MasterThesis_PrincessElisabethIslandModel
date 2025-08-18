@@ -21,10 +21,8 @@ Lm = 2.5e-3 /n_wt_agg;
 Rr = 2.9e-3 /n_wt_agg; % Rotor resistance referred to stator (ratio u is taken into account)
 Ls = Lm + Lsi;
 Lr = Lm + Lsi;
-Vbus = Vr_stator * sqrt(2); % DC bus voltage referred to stator
-Vbus = Vr_stator * sqrt(2)/u;
 Vbus = 1150/u;
-%Vbus = 2400;
+
 
 Idr_rated = sqrt(2)*Is;
 Idg_rated = sqrt(2)*Is*u; 
@@ -134,7 +132,7 @@ ki_v = -300000*n_wt_agg;
 
 
 
-% ligne HVDC
+% HVDC link
 
 
 Rv = 0.74529;
@@ -151,10 +149,7 @@ Kp_P_windfarm = 1 / (1-Ed_max);
 Ki_P_windfarm = 1 / ((1-Ed_max) * Ed_max*tau_p_windfarm);
 Kp_Q_windfarm = Kp_P_windfarm;
 Ki_Q_windfarm = Ki_P_windfarm;
-% Kp_P_windfarm = 1 ;
-% Ki_P_windfarm = 1 ;
-% Kp_Q_windfarm = Kp_P_windfarm;
-% Ki_Q_windfarm = Ki_P_windfarm;
+
 
 
 % PI idq windfarm
@@ -163,38 +158,23 @@ Kp_id_windfarm = Lv / tau_id_windfarm;
 Ki_id_windfarm = Rv / tau_id_windfarm;
 Kp_iq_windfarm = Kp_id_windfarm; 
 Ki_iq_windfarm = Ki_id_windfarm;
-% Kp_id_windfarm = 1;
-% Ki_id_windfarm = 1;
-% Kp_iq_windfarm = Kp_id_windfarm; 
-% Ki_iq_windfarm = Ki_id_windfarm;
+
 
 % PI Q grid
 tau_Q_grid = 20e-3;
 Ed_max_grid = 380e3;
 Kp_Q_grid = 1 / (1-Ed_max_grid);
 Ki_Q_grid = 1 / ((1-Ed_max_grid) * Ed_max_grid*tau_Q_grid);
-% Kp_Q_grid = 1 ;
-% Ki_Q_grid = 1 ;
 
-% PI idq grid
+
+
 tau_id_grid = 5e-3;
 Kp_id_grid= Lv / tau_id_grid;
 Ki_id_grid= Rv / tau_id_grid;
 Kp_iq_grid= Kp_id_grid; 
 Ki_iq_grid= Ki_id_grid;
-% Kp_id_grid=1;
-% Ki_id_grid= 1;
-% Kp_iq_grid= Kp_id_grid; 
-% Ki_iq_grid= Ki_id_grid;
 
 
 
-simIn = Simulink.SimulationInput("complet_finale_stevin"); %create object
-%simIn = simIn.setVariable("my_Parameter",2); %example of setting a parameter override
-simuResults = sim(simIn); %run simulation, all results returned in "out"
 
-% simIn = simIn.setModelParameter('SaveOutput','on','OutputSaveName','yout');
-% simIn = simIn.setModelParameter('SaveFormat','Dataset'); % recommended format
-% out   = sim(simIn);
 
-save('results_complet_SandH.mat','simuResults');
